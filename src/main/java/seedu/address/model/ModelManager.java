@@ -21,6 +21,7 @@ import seedu.address.model.notes.Notes;
 import seedu.address.model.notes.exceptions.NotesNotFoundException;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
+import seedu.address.model.util.NotesEvent;
 
 /**
  * Represents the in-memory model of the task manager data.
@@ -34,6 +35,7 @@ public class ModelManager implements Model {
     private final FilteredList<Notes> filteredNotes;
     private final SimpleObjectProperty<Task> selectedTask = new SimpleObjectProperty<>();
     private final LoginEvent loginEvent;
+    private final NotesEvent notesEvent;
     private final SimpleObjectProperty<Notes> selectedNotes = new SimpleObjectProperty<>();
 
     /**
@@ -51,6 +53,7 @@ public class ModelManager implements Model {
         filteredTasks.addListener(this::ensureSelectedTaskIsValid);
         filteredNotes = new FilteredList<>(versionedTaskManager.getNotesList());
         loginEvent = new LoginEvent();
+        notesEvent = new NotesEvent();
     }
 
     public ModelManager() {
